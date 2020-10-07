@@ -5,9 +5,9 @@
         <h1>連絡先一覧</h1>
       </v-flex>
       <v-flex xs12 mt-5 mr-5 text-right>
-        <nuxt-link to="AddressForm">
+        <router-link :to="{ name: 'addresses-address_id-edit' }">
           <v-btn color="info">連絡先追加</v-btn>
-        </nuxt-link>
+        </router-link>
       </v-flex>
       <v-flex xs12 mt-3 justify-center>
         <v-data-table :headers="headers" :items="addresses">
