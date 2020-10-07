@@ -22,6 +22,7 @@
 
 <script>
 // import firebase from 'firebase'
+import firebase from 'firebase'
 import sideNav from '@/components/sideNav.vue'
 import { mapActions } from 'vuex'
 
@@ -33,20 +34,20 @@ export default {
   data: () => ({
     //
   }),
-  // created() {
-  //   firebase.auth().onAuthStateChanged((user) => {
-  //     if (user) {
-  //       this.setLoginUser(user)
-  //       this.fetchAddresses()
-  //       if (this.$router.currentRoute.name === 'Home') {
-  //         this.$router.push({ name: 'addresses' }, () => {})
-  //       }
-  //     } else {
-  //       this.deleteLoginUser()
-  //       this.$router.push({ name: 'Home' }, () => {})
-  //     }
-  //   })
-  // },
+  created() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setLoginUser(user)
+        this.fetchAddresses()
+        if (this.$router.currentRoute.name === '/') {
+          this.$router.push({ name: 'addresses' }, () => {})
+        }
+      } else {
+        this.deleteLoginUser()
+        this.$router.push('/')
+      }
+    })
+  },
   methods: {
     ...mapActions([
       'toggleSideMenu',
