@@ -67,5 +67,11 @@ export default {
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {},
+  build: {
+    buildDir: 'dist',
+    extend(config) {
+      config.performance.maxAssetSize = 3000000
+      config.performance.maxEntrypointSize = 3000000
+    },
+  },
 }
