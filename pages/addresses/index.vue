@@ -5,18 +5,21 @@
         <h1>連絡先一覧</h1>
       </v-flex>
       <v-flex xs12 mt-5 mr-5 text-right>
-        <router-link :to="{ name: 'addresses-address_id-edit' }">
+        <router-link :to="{ name: 'addresses-create' }">
           <v-btn color="info">連絡先追加</v-btn>
         </router-link>
       </v-flex>
       <v-flex xs12 mt-3 justify-center>
         <v-data-table :headers="headers" :items="addresses">
-          <template v-slot:[`item.actions`]="{ item }">
-            <router-link
-              :to="{ name: 'address_edit', params: { address_id: item.id } }"
+          <template v-slot:[`item.action`]="{ item }">
+            <nuxt-link
+              :to="{
+                name: 'addresses-address_id-edit',
+                params: { address_id: item.id },
+              }"
             >
-              <v-icon small class="mr-2">mdi-pencil</v-icon>
-            </router-link>
+              <v-icon>mdi-pencil</v-icon>
+            </nuxt-link>
             <v-icon small class="mr-2" @click="deleteConfirm(item.id)"
               >mdi-delete</v-icon
             >
