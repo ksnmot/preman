@@ -2,25 +2,26 @@
   <v-container text-xs-center>
     <v-layout row wrap justify-center>
       <v-flex xs12 class="text-center">
-        <h1>連絡先編集</h1>
+        <h1>マンガ情報更新</h1>
       </v-flex>
 
       <v-flex xs5 mt-5>
         <v-card>
           <v-card-text>
             <v-form>
-              <v-text-field v-model="address.name" label="名前"> </v-text-field>
+              <v-text-field v-model="address.name" label="マンガタイトル">
+              </v-text-field>
               <v-text-field
                 v-model="address.tel"
-                label="電話番号"
+                label="読んだ巻数"
               ></v-text-field>
               <v-text-field
                 v-model="address.email"
-                label="メールアドレス"
+                label="最新巻数"
               ></v-text-field>
               <v-text-field
                 v-model="address.address"
-                label="住所"
+                label="未読巻数"
               ></v-text-field>
               <div class="text-center">
                 <!-- 以下実装だと問題なくページ遷移できる-->

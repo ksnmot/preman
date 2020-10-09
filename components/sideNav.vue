@@ -31,7 +31,16 @@ export default {
   data() {
     return {
       items: [
-        { title: '連絡先一覧', icon: 'mdi-menu', link: { name: 'addresses' } },
+        {
+          title: 'マンガ一覧',
+          icon: 'mdi-clipboard-list',
+          link: { name: 'addresses' },
+        },
+        {
+          title: 'マンガ登録',
+          icon: 'mdi-book-plus',
+          link: { name: 'addresses-create' },
+        },
       ],
     }
   },
