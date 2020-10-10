@@ -39,7 +39,7 @@ export default {
       if (user) {
         this.setLoginUser(user)
         this.fetchManga()
-        if (this.$router.currentRoute.name === '/') {
+        if (this.$router.currentRoute.name === 'index') {
           this.$router.push({ name: 'mangas' }, () => {})
         }
       } else {
