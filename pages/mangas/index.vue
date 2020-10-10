@@ -5,17 +5,17 @@
         <h1>マンガ一覧</h1>
       </v-flex>
       <v-flex xs12 mt-5 mr-5 text-right>
-        <router-link :to="{ name: 'addresses-create' }">
+        <router-link :to="{ name: 'mangas-create' }">
           <v-btn color="info">新規マンガ登録</v-btn>
         </router-link>
       </v-flex>
       <v-flex xs12 mt-3 justify-center>
-        <v-data-table :headers="headers" :items="addresses">
+        <v-data-table :headers="headers" :items="mangas">
           <template v-slot:[`item.action`]="{ item }">
             <nuxt-link
               :to="{
-                name: 'addresses-address_id-edit',
-                params: { address_id: item.id },
+                name: 'mangas-manga_id-edit',
+                params: { manga_id: item.id },
               }"
             >
               <v-icon>mdi-plus-circle</v-icon>
@@ -40,19 +40,19 @@ export default {
         { text: 'Unread', value: 'address' },
         { text: 'Action', value: 'action', sortable: false },
       ],
-      addresses: [],
+      mangas: [],
     }
   },
   created() {
-    this.addresses = this.$store.state.addresses
+    this.mangas = this.$store.state.mangas
   },
   methods: {
     deleteConfirm(id) {
       if (confirm('削除してよろしいですか？')) {
-        this.deleteAddress({ id })
+        this.deleteManga({ id })
       }
     },
-    ...mapActions(['deleteAddress']),
+    ...mapActions(['deleteManga']),
   },
 }
 </script>
