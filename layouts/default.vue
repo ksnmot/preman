@@ -5,10 +5,12 @@
         v-show="$store.state.login_user"
         @click.stop="toggleSideMenu"
       ></v-app-bar-nav-icon>
-      <v-toolbar-title></v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-title>{{ pagetitle }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items v-if="$store.state.login_user">
-        <v-btn text @click="logout">ログアウト</v-btn>
+        <!-- <v-btn @click="logout">ログアウト</v-btn> -->
+        <v-icon @click="logout">mdi-cog</v-icon>
       </v-toolbar-items>
     </v-app-bar>
     <sideNav />
@@ -31,9 +33,14 @@ export default {
   components: {
     sideNav,
   },
-  data: () => ({
-    //
-  }),
+  // data: () => ({
+  //   //
+  // }),
+  data() {
+    return {
+      pagetitle: null,
+    }
+  },
   created() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -47,6 +54,9 @@ export default {
         this.$router.push('/')
       }
     })
+  },
+  beforeUpdate() {
+    this.pagetitle = this.$store.state.page_title
   },
   methods: {
     ...mapActions([

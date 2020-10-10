@@ -52,8 +52,12 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
+      pagetitle: 'マンガ追加登録',
       manga: {},
     }
+  },
+  created() {
+    this.setPageTitle(this.pagetitle)
   },
   methods: {
     submit() {
@@ -68,7 +72,7 @@ export default {
       this.$router.push({ name: 'mangas' })
       this.manga = {}
     },
-    ...mapActions(['addManga', 'updateManga']),
+    ...mapActions(['addManga', 'updateManga', 'setPageTitle']),
   },
 }
 </script>

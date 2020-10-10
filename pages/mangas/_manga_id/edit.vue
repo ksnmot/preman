@@ -51,9 +51,11 @@ export default {
   data() {
     return {
       manga: {},
+      pagetitle: 'マンガ情報更新',
     }
   },
   created() {
+    this.setPageTitle(this.pagetitle)
     if (!this.$route.params.manga_id) return
     const manga = this.$store.getters.getMangaById(this.$route.params.manga_id)
     if (manga) {
@@ -75,7 +77,7 @@ export default {
       this.$router.push({ name: 'mangas' })
       this.manga = {}
     },
-    ...mapActions(['addManga', 'updateManga']),
+    ...mapActions(['addManga', 'updateManga', 'setPageTitle']),
   },
 }
 </script>

@@ -10,6 +10,7 @@ const createStore = () => {
       login_user: null,
       drawer: false,
       mangas: [],
+      page_title: null,
     }),
     mutations: {
       setLoginUser(state, user) {
@@ -22,6 +23,10 @@ const createStore = () => {
 
       toggleSideMenu(state) {
         state.drawer = !state.drawer
+      },
+
+      setPageTitle(state, pagetitle) {
+        state.page_title = pagetitle
       },
       addManga(state, { id, manga }) {
         manga.id = id
@@ -45,6 +50,10 @@ const createStore = () => {
       },
       setLoginUser({ commit }, user) {
         commit('setLoginUser', user)
+      },
+
+      setPageTitle({ commit }, pagetitle) {
+        commit('setPageTitle', pagetitle)
       },
 
       fetchManga({ getters, commit }) {

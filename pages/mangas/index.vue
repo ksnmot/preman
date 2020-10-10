@@ -4,12 +4,7 @@
       <v-flex xs12>
         <h1>マンガ一覧</h1>
       </v-flex>
-      <v-flex xs12 mt-5 mr-5 text-right>
-        <router-link :to="{ name: 'mangas-create' }">
-          <v-btn color="info">新規マンガ登録</v-btn>
-        </router-link>
-      </v-flex>
-      <v-flex xs12 mt-3 justify-center>
+      <v-flex xs12 mt-1 justify-center>
         <v-data-table :headers="headers" :items="mangas">
           <template v-slot:[`item.action`]="{ item }">
             <nuxt-link
@@ -24,6 +19,13 @@
           </template>
         </v-data-table>
       </v-flex>
+      <v-flex xs12 mt-5 justify-center>
+        <router-link :to="{ name: 'mangas-create' }">
+          <v-btn block rounded outlined color="white"
+            >Add manga -マンガ追加登録-</v-btn
+          >
+        </router-link>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
@@ -33,6 +35,7 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
+      pagetitle: 'マンガ一覧',
       headers: [
         { text: 'Title', value: 'title' },
         { text: 'Read', value: 'read' },
@@ -45,6 +48,7 @@ export default {
   },
   created() {
     this.mangas = this.$store.state.mangas
+    this.setPageTitle(this.pagetitle)
   },
   methods: {
     deleteConfirm(id) {
@@ -52,7 +56,7 @@ export default {
         this.deleteManga({ id })
       }
     },
-    ...mapActions(['deleteManga']),
+    ...mapActions(['deleteManga', 'setPageTitle']),
   },
 }
 </script>
