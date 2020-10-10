@@ -34,10 +34,10 @@ export default {
   data() {
     return {
       headers: [
-        { text: 'Title', value: 'name' },
-        { text: 'Read', value: 'tel' },
-        { text: 'Latest', value: 'email' },
-        { text: 'Unread', value: 'address' },
+        { text: 'Title', value: 'title' },
+        { text: 'Read', value: 'read' },
+        { text: 'Latest', value: 'latest' },
+        { text: 'Unread', value: 'unread' },
         { text: 'Action', value: 'action', sortable: false },
       ],
       mangas: [],

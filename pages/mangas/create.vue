@@ -9,18 +9,18 @@
         <v-card>
           <v-card-text>
             <v-form>
-              <v-text-field v-model="manga.name" label="マンガタイトル">
+              <v-text-field v-model="manga.title" label="マンガタイトル">
               </v-text-field>
               <v-text-field
-                v-model="manga.tel"
+                v-model="manga.read"
                 label="読んだ巻数"
               ></v-text-field>
               <v-text-field
-                v-model="manga.email"
+                v-model="manga.latest"
                 label="最新巻数"
               ></v-text-field>
               <v-text-field
-                v-model="manga.address"
+                v-model="manga.unread"
                 label="未読巻数"
               ></v-text-field>
               <div class="text-center">
@@ -53,15 +53,6 @@ export default {
   data() {
     return {
       manga: {},
-    }
-  },
-  created() {
-    if (!this.$route.params.manga_id) return
-    const manga = this.$store.getters.getMangaById(this.$route.params.manga_id)
-    if (manga) {
-      this.manga = manga
-    } else {
-      this.$router.push({ name: 'mangas' })
     }
   },
   methods: {
