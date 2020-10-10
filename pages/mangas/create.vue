@@ -1,10 +1,9 @@
 <template>
   <v-container text-xs-center>
     <v-layout row wrap justify-center>
-      <v-flex xs12 class="text-center">
+      <!-- <v-flex xs12 class="text-center">
         <h1>新規マンガ登録</h1>
-      </v-flex>
-
+      </v-flex> -->
       <v-flex xs12 mt-5>
         <v-card>
           <v-card-text>
@@ -23,23 +22,24 @@
                 v-model="manga.unread"
                 label="未読巻数"
               ></v-text-field> -->
-              <div class="text-center">
-                <!-- 以下実装だと問題なくページ遷移できる-->
-                <v-btn @click="$router.push({ name: 'mangas' })"
-                  >キャンセル</v-btn
-                >
-                <!-- 以下実装だと何故かページ遷移できない-->
-                <!-- <router-link :to="{ name: 'address_edit' }">
-                  <v-btn color="info">
-                    キャンセル2
-                  </v-btn>
-                </router-link> -->
-
-                <v-btn color="info" @click="submit">新規登録</v-btn>
-              </div>
             </v-form>
           </v-card-text>
         </v-card>
+      </v-flex>
+      <v-flex xs12 mt-5 justify-center>
+        <v-btn block rounded outlined color="white" @click="submit"
+          >Add Manga -新規登録-</v-btn
+        >
+      </v-flex>
+      <v-flex xs12 mt-5 justify-center>
+        <v-btn
+          block
+          rounded
+          outlined
+          color="white"
+          @click="$router.push({ name: 'mangas' })"
+          >Back -戻る-</v-btn
+        >
       </v-flex>
     </v-layout>
   </v-container>
@@ -61,8 +61,8 @@ export default {
     submit() {
       this.manga.unread = this.manga.latest - this.manga.read
       this.addManga(this.manga)
-      this.$router.push({ name: 'mangas' })
       this.manga = {}
+      this.$router.push({ name: 'mangas' })
     },
     ...mapActions(['addManga', 'updateManga', 'setPageTitle']),
   },

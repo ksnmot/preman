@@ -1,11 +1,10 @@
 <template>
   <v-container text-xs-center>
     <v-layout row wrap justify-center>
-      <v-flex xs12 class="text-center">
+      <!-- <v-flex xs12 class="text-center">
         <h1>マンガ情報更新</h1>
-      </v-flex>
-
-      <v-flex xs5 mt-5>
+      </v-flex> -->
+      <v-flex xs12 mt-5>
         <v-card>
           <v-card-text>
             <v-form>
@@ -25,23 +24,34 @@
                 v-model="manga.unread"
                 label="未読巻数"
               ></v-text-field> -->
-              <div class="text-center">
-                <!-- 以下実装だと問題なくページ遷移できる-->
-                <v-btn @click="$router.push({ name: 'mangas' })"
-                  >キャンセル</v-btn
-                >
-                <!-- 以下実装だと何故かページ遷移できない-->
-                <!-- <router-link :to="{ name: 'address_edit' }">
-                  <v-btn color="info">
-                    キャンセル2
-                  </v-btn>
-                </router-link> -->
-
-                <v-btn color="info" class="ml-2" @click="submit">保存</v-btn>
-              </div>
             </v-form>
           </v-card-text>
         </v-card>
+      </v-flex>
+      <v-flex xs12 mt-5 justify-center>
+        <v-btn block rounded outlined color="white" @click="submit"
+          >Update -更新-</v-btn
+        >
+      </v-flex>
+      <v-flex xs12 mt-5 justify-center>
+        <v-btn
+          block
+          rounded
+          outlined
+          color="white"
+          @click="deleteConfirm(manga.id)"
+          >Delete -削除-</v-btn
+        >
+      </v-flex>
+      <v-flex xs12 mt-5 justify-center>
+        <v-btn
+          block
+          rounded
+          outlined
+          color="white"
+          @click="$router.push({ name: 'mangas' })"
+          >Back -戻る-</v-btn
+        >
       </v-flex>
     </v-layout>
   </v-container>
@@ -77,10 +87,17 @@ export default {
       } else {
         this.addManga(this.manga)
       }
-      this.$router.push({ name: 'mangas' })
       this.manga = {}
+      this.$router.push({ name: 'mangas' })
     },
-    ...mapActions(['addManga', 'updateManga', 'setPageTitle']),
+    deleteConfirm(id) {
+      if (confirm('削除してよろしいですか？')) {
+        this.deleteManga({ id })
+        this.manga = {}
+        this.$router.push({ name: 'mangas' })
+      }
+    },
+    ...mapActions(['addManga', 'updateManga', 'setPageTitle', 'deleteManga']),
   },
 }
 </script>
