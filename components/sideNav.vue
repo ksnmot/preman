@@ -34,12 +34,12 @@ export default {
         {
           title: 'マンガ一覧',
           icon: 'mdi-clipboard-list',
-          link: { name: 'addresses' },
+          link: { name: 'mangas' },
         },
         {
           title: 'マンガ登録',
           icon: 'mdi-book-plus',
-          link: { name: 'addresses-create' },
+          link: { name: 'mangas-create' },
         },
       ],
     }

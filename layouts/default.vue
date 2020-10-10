@@ -38,9 +38,9 @@ export default {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setLoginUser(user)
-        this.fetchAddresses()
+        this.fetchManga()
         if (this.$router.currentRoute.name === '/') {
-          this.$router.push({ name: 'addresses' }, () => {})
+          this.$router.push({ name: 'mangas' }, () => {})
         }
       } else {
         this.deleteLoginUser()
@@ -54,7 +54,7 @@ export default {
       'setLoginUser',
       'logout',
       'deleteLoginUser',
-      'fetchAddresses',
+      'fetchManga',
     ]),
   },
 }

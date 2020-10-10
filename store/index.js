@@ -9,7 +9,7 @@ const createStore = () => {
     state: () => ({
       login_user: null,
       drawer: false,
-      addresses: [],
+      mangas: [],
     }),
     mutations: {
       setLoginUser(state, user) {
@@ -23,19 +23,19 @@ const createStore = () => {
       toggleSideMenu(state) {
         state.drawer = !state.drawer
       },
-      addAddress(state, { id, address }) {
-        address.id = id
-        state.addresses.push(address)
+      addManga(state, { id, manga }) {
+        manga.id = id
+        state.mangas.push(manga)
       },
-      updateAddress(state, { id, address }) {
-        const index = state.addresses.findIndex((address) => address.id === id)
+      updateManga(state, { id, manga }) {
+        const index = state.mangas.findIndex((manga) => manga.id === id)
 
-        state.addresses[index] = address
+        state.mangas[index] = manga
       },
-      deleteAddress(state, { id }) {
-        const index = state.addresses.findIndex((address) => address.id === id)
+      deleteManga(state, { id }) {
+        const index = state.mangas.findIndex((manga) => manga.id === id)
 
-        state.addresses.splice(index, 1)
+        state.mangas.splice(index, 1)
       },
     },
     actions: {
@@ -47,14 +47,14 @@ const createStore = () => {
         commit('setLoginUser', user)
       },
 
-      fetchAddresses({ getters, commit }) {
+      fetchManga({ getters, commit }) {
         firebase
           .firestore()
-          .collection(`users/${getters.uid}/addresses`)
+          .collection(`users/${getters.uid}/mangas`)
           .get()
           .then((snapshot) => {
             snapshot.forEach((doc) =>
-              commit('addAddress', { id: doc.id, address: doc.data() })
+              commit('addManga', { id: doc.id, manga: doc.data() })
             )
           })
       },
@@ -70,41 +70,41 @@ const createStore = () => {
       toggleSideMenu({ commit }) {
         commit('toggleSideMenu')
       },
-      addAddress({ getters, commit }, address) {
+      addManga({ getters, commit }, manga) {
         if (getters.uid) {
           firebase
             .firestore()
-            .collection(`users/${getters.uid}/addresses`)
-            .add(address)
+            .collection(`users/${getters.uid}/mangas`)
+            .add(manga)
             .then((doc) => {
-              commit('addAddress', { id: doc.id, address })
+              commit('addManga', { id: doc.id, manga })
             })
           // 臨時：取得できなくてもとりあえずstoreに保存
         } else {
-          commit('addAddress', { id: 'testdocid', address })
+          commit('addManga', { id: 'testdocid', manga })
         }
       },
-      updateAddress({ getters, commit }, { id, address }) {
+      updateManga({ getters, commit }, { id, manga }) {
         if (getters.uid) {
           firebase
             .firestore()
-            .collection(`users/${getters.uid}/addresses`)
+            .collection(`users/${getters.uid}/mangas`)
             .doc(id)
-            .update(address)
+            .update(manga)
             .then(() => {
-              commit('updateAddress', { id, address })
+              commit('updateManga', { id, manga })
             })
         }
       },
-      deleteAddress({ getters, commit }, { id }) {
+      deleteManga({ getters, commit }, { id }) {
         if (getters.uid) {
           firebase
             .firestore()
-            .collection(`users/${getters.uid}/addresses`)
+            .collection(`users/${getters.uid}/mangas`)
             .doc(id)
             .delete()
             .then(() => {
-              commit('deleteAddress', { id })
+              commit('deleteManga', { id })
             })
         }
       },
@@ -115,8 +115,8 @@ const createStore = () => {
         state.login_user ? state.login_user.displayName : '',
       photoURL: (state) => (state.login_user ? state.login_user.photoURL : ''),
       uid: (state) => (state.login_user ? state.login_user.uid : null),
-      getAddressById: (state) => (id) =>
-        state.addresses.find((address) => address.id === id),
+      getMangaById: (state) => (id) =>
+        state.mangas.find((manga) => manga.id === id),
     },
   })
 }

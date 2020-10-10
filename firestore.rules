@@ -1,6 +1,6 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /users/{userId}/addresses/{addressId}{
+    match /users/{userId}/mangas/{mangaId}{
       allow read, update, delete: if request.auth.uid == userId;
       allow create: if request.auth.uid != null;
     }
