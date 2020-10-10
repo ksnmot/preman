@@ -19,10 +19,12 @@
                 v-model="manga.latest"
                 label="最新巻数"
               ></v-text-field>
-              <v-text-field
+              未読巻数
+              {{ manga.unread }}
+              <!-- <v-text-field
                 v-model="manga.unread"
                 label="未読巻数"
-              ></v-text-field>
+              ></v-text-field> -->
               <div class="text-center">
                 <!-- 以下実装だと問題なくページ遷移できる-->
                 <v-btn @click="$router.push({ name: 'mangas' })"
@@ -66,6 +68,7 @@ export default {
   },
   methods: {
     submit() {
+      this.manga.unread = this.manga.latest - this.manga.read
       if (this.$route.params.manga_id) {
         this.updateManga({
           id: this.$route.params.manga_id,

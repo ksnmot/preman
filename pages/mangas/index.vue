@@ -1,8 +1,19 @@
 <template>
   <v-container text-xs-center justify-center>
-    <v-layout row wrap>
-      <v-flex xs12>
-        <h1>マンガ一覧</h1>
+    <v-layout justify-center row wrap>
+      <v-flex xs10 justify-center>
+        <v-card color="red" class="rounded-pill">
+          <v-layout v-if="unreadTotal !== 0" justify-center>
+            You missed {{ unreadTotal }} volumes!
+            <br />
+            未読巻が {{ unreadTotal }} 巻あります
+          </v-layout>
+          <v-layout v-else justify-center>
+            You don't have missed volumes.
+            <br />
+            未読巻はありません
+          </v-layout>
+        </v-card>
       </v-flex>
       <v-flex xs12 mt-1 justify-center>
         <v-card class="smallFont">
@@ -59,21 +70,28 @@ export default {
   data() {
     return {
       pagetitle: 'マンガ一覧',
-      headers: [
-        { text: 'Title', value: 'title' },
-        { text: 'Read', value: 'read' },
-        { text: 'Latest', value: 'latest' },
-        { text: 'Unread', value: 'unread' },
-        { text: 'Action', value: 'action', sortable: false },
-      ],
       mangas: [],
+      unreadTotal: 0,
+      // headers: [
+      //   { text: 'Title', value: 'title' },
+      //   { text: 'Read', value: 'read' },
+      //   { text: 'Latest', value: 'latest' },
+      //   { text: 'Unread', value: 'unread' },
+      //   { text: 'Action', value: 'action', sortable: false },
+      // ],
     }
   },
   created() {
     this.mangas = this.$store.state.mangas
+    this.calcUnreadTotal()
     this.setPageTitle(this.pagetitle)
   },
   methods: {
+    calcUnreadTotal() {
+      for (let i = 0; i < this.mangas.length; i++) {
+        this.unreadTotal += this.mangas[i].unread
+      }
+    },
     deleteConfirm(id) {
       if (confirm('削除してよろしいですか？')) {
         this.deleteManga({ id })

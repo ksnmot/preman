@@ -5,7 +5,7 @@
         <h1>新規マンガ登録</h1>
       </v-flex>
 
-      <v-flex xs5 mt-5>
+      <v-flex xs12 mt-5>
         <v-card>
           <v-card-text>
             <v-form>
@@ -19,10 +19,10 @@
                 v-model="manga.latest"
                 label="最新巻数"
               ></v-text-field>
-              <v-text-field
+              <!-- <v-text-field
                 v-model="manga.unread"
                 label="未読巻数"
-              ></v-text-field>
+              ></v-text-field> -->
               <div class="text-center">
                 <!-- 以下実装だと問題なくページ遷移できる-->
                 <v-btn @click="$router.push({ name: 'mangas' })"
@@ -35,9 +35,7 @@
                   </v-btn>
                 </router-link> -->
 
-                <v-btn color="info" class="ml-2" @click="submit"
-                  >新規登録</v-btn
-                >
+                <v-btn color="info" @click="submit">新規登録</v-btn>
               </div>
             </v-form>
           </v-card-text>
@@ -61,14 +59,8 @@ export default {
   },
   methods: {
     submit() {
-      if (this.$route.params.manga_id) {
-        this.updateManga({
-          id: this.$route.params.manga_id,
-          manga: this.manga,
-        })
-      } else {
-        this.addManga(this.manga)
-      }
+      this.manga.unread = this.manga.latest - this.manga.read
+      this.addManga(this.manga)
       this.$router.push({ name: 'mangas' })
       this.manga = {}
     },
