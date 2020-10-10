@@ -15,7 +15,7 @@
           </v-layout>
         </v-card>
       </v-flex>
-      <v-flex v-if="mangas" xs12 mt-1 justify-center>
+      <v-flex v-if="mangas[0]" xs12 mt-1 justify-center>
         <v-card class="smallFont">
           <v-list-item row="4">
             <v-col class="px-2" cols="6">Title</v-col>
