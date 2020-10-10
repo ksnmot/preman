@@ -15,7 +15,7 @@
           </v-layout>
         </v-card>
       </v-flex>
-      <v-flex xs12 mt-1 justify-center>
+      <v-flex v-if="mangas" xs12 mt-1 justify-center>
         <v-card class="smallFont">
           <v-list-item row="4">
             <v-col class="px-2" cols="6">Title</v-col>
@@ -53,6 +53,34 @@
           </template>
         </v-data-table> -->
       </v-flex>
+      <v-flex v-else xs10 py-15 justify-center>
+        <v-card
+          outlined
+          elevation="10"
+          color="blue-grey darken-4"
+          height="100"
+          class="smallFont"
+        >
+          <v-layout justify-center row wrap>
+            <v-flex xs4>
+              <v-layout my-3>
+                <router-link :to="{ name: 'mangas-create' }">
+                  <v-btn small rounded light color="white">Let's Start</v-btn>
+                </router-link>
+              </v-layout>
+            </v-flex>
+            <v-flex xs10>
+              <v-card color="blue-grey darken-4" elevation="0">
+                <v-layout justify-center
+                  >マンガが登録されていません。<br />
+                  読んでいるマンガを登録してみましょう！
+                </v-layout>
+              </v-card>
+            </v-flex>
+          </v-layout>
+        </v-card>
+      </v-flex>
+
       <v-flex xs12 mt-5 justify-center>
         <router-link :to="{ name: 'mangas-create' }">
           <v-btn block rounded outlined color="white"
