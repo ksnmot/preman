@@ -2,7 +2,12 @@
   <v-container text-xs-center justify-center>
     <v-layout justify-center row wrap>
       <v-flex xs10 justify-center>
-        <v-card color="red" class="rounded-pill">
+        <v-card
+          style="height: 50px"
+          v-if="showUnreadTotal === 'true'"
+          color="red"
+          class="rounded-pill"
+        >
           <v-layout v-if="unreadTotal !== 0" justify-center>
             You missed {{ unreadTotal }} volumes!
             <br />
@@ -13,6 +18,13 @@
             <br />
             未読巻はありません
           </v-layout>
+        </v-card>
+        <v-card
+          v-else
+          color="#121212"
+          style="height: 50px"
+          class="rounded-pill"
+        >
         </v-card>
       </v-flex>
       <v-flex v-if="mangas[0]" xs12 mt-1 justify-center>
@@ -100,6 +112,7 @@ export default {
       pagetitle: 'マンガ一覧',
       mangas: [],
       unreadTotal: 0,
+      showUnreadTotal: 'false',
       // headers: [
       //   { text: 'Title', value: 'title' },
       //   { text: 'Read', value: 'read' },
@@ -112,16 +125,18 @@ export default {
   created() {
     this.mangas = this.$store.state.mangas
     this.setPageTitle(this.pagetitle)
+    setTimeout(this.calcUnreadTotal, 1500)
   },
 
-  beforeMount() {
-    this.calcUnreadTotal()
-  },
+  // beforeMount() {
+  //   setTimeout(this.calcUnreadTotal, 2000)
+  // },
   methods: {
     calcUnreadTotal() {
       for (let i = 0; i < this.mangas.length; i++) {
         this.unreadTotal += this.mangas[i].unread
       }
+      this.showUnreadTotal = 'true'
     },
     deleteConfirm(id) {
       if (confirm('削除してよろしいですか？')) {
