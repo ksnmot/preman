@@ -11,7 +11,6 @@ const createStore = () => {
       drawer: false,
       mangas: [],
       page_title: null,
-      unreadTotal: 12,
     }),
     mutations: {
       setLoginUser(state, user) {
@@ -29,15 +28,9 @@ const createStore = () => {
       setPageTitle(state, pagetitle) {
         state.page_title = pagetitle
       },
-
       addManga(state, { id, manga }) {
         manga.id = id
         state.mangas.push(manga)
-      },
-      calcUnreadTotal(state) {
-        for (let i = 0; i < state.mangas.length; i++) {
-          state.unreadTotal += state.mangas[i].unread
-        }
       },
       updateManga(state, { id, manga }) {
         const index = state.mangas.findIndex((manga) => manga.id === id)
@@ -74,9 +67,7 @@ const createStore = () => {
             )
           })
       },
-      calcUnreadTotal({ commit }) {
-        commit('calcUnreadTotal')
-      },
+
       logout() {
         firebase.auth().signOut()
       },

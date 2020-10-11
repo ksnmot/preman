@@ -53,9 +53,6 @@ export default {
       }
     })
   },
-  updated() {
-    this.calcUnreadTotal()
-  },
   methods: {
     ...mapActions([
       'toggleSideMenu',
@@ -63,7 +60,6 @@ export default {
       'logout',
       'deleteLoginUser',
       'fetchManga',
-      'calcUnreadTotal',
     ]),
   },
 }
