@@ -10,7 +10,7 @@
       <v-spacer></v-spacer>
       <v-toolbar-items v-if="$store.state.login_user">
         <!-- <v-btn @click="logout">ログアウト</v-btn> -->
-        <v-icon @click="logout">mdi-cog</v-icon>
+        <v-icon @click="logout">mdi-logout</v-icon>
       </v-toolbar-items>
     </v-app-bar>
     <sideNav />

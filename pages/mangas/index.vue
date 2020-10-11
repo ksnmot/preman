@@ -3,8 +3,8 @@
     <v-layout justify-center row wrap>
       <v-flex xs10 justify-center>
         <v-card
-          style="height: 50px"
           v-if="showUnreadTotal === 'true'"
+          style="height: 50px"
           color="red"
           class="rounded-pill"
         >
@@ -51,19 +51,6 @@
             </v-list-item>
           </nuxt-link>
         </v-card>
-        <!-- <v-data-table :headers="headers" :items="mangas">
-          <template v-slot:[`item.action`]="{ item }">
-            <nuxt-link
-              :to="{
-                name: 'mangas-manga_id-edit',
-                params: { manga_id: item.id },
-              }"
-            >
-              <v-icon>mdi-plus-circle</v-icon>
-            </nuxt-link>
-            <v-icon @click="deleteConfirm(item.id)">mdi-delete-circle</v-icon>
-          </template>
-        </v-data-table> -->
       </v-flex>
       <v-flex v-else xs10 py-15 justify-center>
         <v-card
@@ -92,8 +79,7 @@
           </v-layout>
         </v-card>
       </v-flex>
-
-      <v-flex xs12 mt-5 justify-center>
+      <v-flex xs12 mt-5 align-self-end justify-center>
         <router-link :to="{ name: 'mangas-create' }">
           <v-btn block rounded outlined color="white"
             >Add manga -マンガ追加登録-</v-btn
@@ -109,7 +95,7 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
-      pagetitle: 'マンガ一覧',
+      pagetitle: 'マンガリスト',
       mangas: [],
       unreadTotal: 0,
       showUnreadTotal: 'false',
