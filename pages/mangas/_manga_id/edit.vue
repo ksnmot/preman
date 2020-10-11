@@ -10,14 +10,29 @@
             <v-form>
               <v-text-field v-model="manga.title" label="マンガタイトル">
               </v-text-field>
-              <v-text-field
+              <v-select
+                v-model="manga.read"
+                :items="items"
+                label="読んだ巻数"
+                dense
+              >
+              </v-select>
+              <v-select
+                v-model="manga.latest"
+                :items="items"
+                label="最新巻数"
+                dense
+              >
+              </v-select>
+
+              <!-- <v-text-field
                 v-model="manga.read"
                 label="読んだ巻数"
               ></v-text-field>
               <v-text-field
                 v-model="manga.latest"
                 label="最新巻数"
-              ></v-text-field>
+              ></v-text-field> -->
               未読巻数
               {{ manga.unread }}
               <!-- <v-text-field
@@ -28,6 +43,23 @@
           </v-card-text>
         </v-card>
       </v-flex>
+      <v-flex xs9 justify-center>
+        <v-alert
+          v-if="alert === 'unfill'"
+          dense
+          type="warning"
+          color="yellow darken-4"
+          >未入力の項目があります</v-alert
+        >
+        <v-alert
+          v-if="alert === 'over'"
+          dense
+          type="warning"
+          color="yellow darken-4"
+          >読んだ巻数が多すぎます</v-alert
+        >
+      </v-flex>
+
       <v-flex xs12 mt-5 justify-center>
         <v-btn block rounded outlined color="white" @click="submit"
           >Update -更新-</v-btn
@@ -59,11 +91,15 @@
 
 <script>
 import { mapActions } from 'vuex'
+const maxVol = 151
+const volRange = [...Array(maxVol).keys()]
 export default {
   data() {
     return {
       manga: {},
       pagetitle: 'マンガ情報更新',
+      items: volRange,
+      alert: null,
     }
   },
   created() {
@@ -78,17 +114,30 @@ export default {
   },
   methods: {
     submit() {
-      this.manga.unread = this.manga.latest - this.manga.read
-      if (this.$route.params.manga_id) {
-        this.updateManga({
-          id: this.$route.params.manga_id,
-          manga: this.manga,
-        })
-      } else {
-        this.addManga(this.manga)
+      this.inputCheck()
+      if (this.alert === null) {
+        this.manga.unread = this.manga.latest - this.manga.read
+        if (this.$route.params.manga_id) {
+          this.updateManga({
+            id: this.$route.params.manga_id,
+            manga: this.manga,
+          })
+        } else {
+          this.addManga(this.manga)
+        }
+        this.manga = {}
+        this.$router.push({ name: 'success-edited' })
       }
-      this.manga = {}
-      this.$router.push({ name: 'success-edited' })
+    },
+    inputCheck() {
+      if (this.manga.title && this.manga.read && this.manga.latest) {
+        this.alert = null
+      } else {
+        this.alert = 'unfill'
+      }
+      if (this.manga.read > this.manga.latest) {
+        this.alert = 'over'
+      }
     },
     deleteConfirm(id) {
       if (confirm('削除してよろしいですか？')) {
