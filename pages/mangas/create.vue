@@ -62,7 +62,7 @@ export default {
       this.manga.unread = this.manga.latest - this.manga.read
       this.addManga(this.manga)
       this.manga = {}
-      this.$router.push({ name: 'mangas' })
+      this.$router.push({ name: 'success-created' })
     },
     ...mapActions(['addManga', 'updateManga', 'setPageTitle']),
   },

@@ -88,7 +88,7 @@ export default {
         this.addManga(this.manga)
       }
       this.manga = {}
-      this.$router.push({ name: 'mangas' })
+      this.$router.push({ name: 'success-edited' })
     },
     deleteConfirm(id) {
       if (confirm('削除してよろしいですか？')) {
