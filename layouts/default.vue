@@ -6,7 +6,7 @@
         @click.stop="toggleSideMenu"
       ></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
-      <v-toolbar-title>{{ pagetitle }}</v-toolbar-title>
+      <v-toolbar-title>{{ this.$store.state.page_title }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items v-if="$store.state.login_user">
         <!-- <v-btn @click="logout">ログアウト</v-btn> -->
@@ -37,9 +37,7 @@ export default {
   //   //
   // }),
   data() {
-    return {
-      pagetitle: null,
-    }
+    return {}
   },
   created() {
     firebase.auth().onAuthStateChanged((user) => {
@@ -54,9 +52,6 @@ export default {
         this.$router.push('/')
       }
     })
-  },
-  beforeUpdate() {
-    this.pagetitle = this.$store.state.page_title
   },
   methods: {
     ...mapActions([

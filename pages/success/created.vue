@@ -33,7 +33,14 @@ export default {
   data() {
     return {}
   },
+  mounted() {
+    setTimeout(this.returnMainPage, 5000)
+  },
 
-  methods: {},
+  methods: {
+    returnMainPage() {
+      this.$router.push({ name: 'mangas' })
+    },
+  },
 }
 </script>

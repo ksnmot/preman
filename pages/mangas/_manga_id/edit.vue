@@ -5260,7 +5260,7 @@ export default {
     }
   },
   created() {
-    this.setPageTitle(this.pagetitle)
+    this.setPageTitle('マンガ情報更新')
     if (!this.$route.params.manga_id) return
     const manga = this.$store.getters.getMangaById(this.$route.params.manga_id)
     if (manga) {

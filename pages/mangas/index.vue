@@ -111,8 +111,11 @@ export default {
   },
   created() {
     this.mangas = this.$store.state.mangas
-    this.calcUnreadTotal()
     this.setPageTitle(this.pagetitle)
+  },
+
+  beforeMount() {
+    this.calcUnreadTotal()
   },
   methods: {
     calcUnreadTotal() {
