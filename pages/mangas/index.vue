@@ -3,10 +3,10 @@
     <v-layout justify-center row wrap>
       <v-flex xs10 justify-center>
         <v-card color="red" class="rounded-pill">
-          <v-layout v-if="unreadTotal !== 0" justify-center>
-            You missed {{ unreadTotal }} volumes!
+          <v-layout v-if="this.$store.state.unreadTotal !== 0" justify-center>
+            You missed {{ this.$store.state.unreadTotal }} volumes!
             <br />
-            未読巻が {{ unreadTotal }} 巻あります
+            未読巻が {{ this.$store.state.unreadTotal }} 巻あります
           </v-layout>
           <v-layout v-else justify-center>
             You don't have missed volumes.
@@ -114,15 +114,15 @@ export default {
     this.setPageTitle(this.pagetitle)
   },
 
-  beforeMount() {
-    this.calcUnreadTotal()
-  },
+  // beforeMount() {
+  //   this.calcUnreadTotal()
+  // },
   methods: {
-    calcUnreadTotal() {
-      for (let i = 0; i < this.mangas.length; i++) {
-        this.unreadTotal += this.mangas[i].unread
-      }
-    },
+    // calcUnreadTotal() {
+    //   for (let i = 0; i < this.mangas.length; i++) {
+    //     this.unreadTotal += this.mangas[i].unread
+    //   }
+    // },
     deleteConfirm(id) {
       if (confirm('削除してよろしいですか？')) {
         this.deleteManga({ id })
