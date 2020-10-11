@@ -84,6 +84,7 @@ import { mapActions } from 'vuex'
 const maxVol = 151
 const volRange = [...Array(maxVol).keys()]
 const mangaRange = [
+  '亜人',
   'アークザラッド',
   'アークザラッドII',
   'アークザラッド2〜炎のエルク〜',
@@ -4513,6 +4514,7 @@ const mangaRange = [
   '薬師アルジャン',
   '薬師寺涼子の怪奇事件簿',
   'ヤ・ク・ソ・ク',
+  '約束のネバーランド',
   '八雲立つ',
   'やけくそ天使',
   'やけっぱちのマリア',
