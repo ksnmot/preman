@@ -1,10 +1,7 @@
 <template>
-  <v-container text-xs-center>
-    <v-layout row wrap justify-center>
-      <!-- <v-flex xs12 class="text-center">
-        <h1>マンガ情報更新</h1>
-      </v-flex> -->
-      <v-flex xs12 mt-5>
+  <v-container fluid>
+    <v-row align="center" justify="center">
+      <v-col cols="12" mt-5>
         <v-card>
           <v-card-text>
             <v-form>
@@ -29,25 +26,13 @@
               >
               </v-select>
 
-              <!-- <v-text-field
-                v-model="manga.read"
-                label="読んだ巻数"
-              ></v-text-field>
-              <v-text-field
-                v-model="manga.latest"
-                label="最新巻数"
-              ></v-text-field> -->
               未読巻数
               {{ manga.unread }}
-              <!-- <v-text-field
-                v-model="manga.unread"
-                label="未読巻数"
-              ></v-text-field> -->
             </v-form>
           </v-card-text>
         </v-card>
-      </v-flex>
-      <v-flex xs9 justify-center>
+      </v-col>
+      <v-col cols="10" mt-5>
         <v-alert
           v-if="alert === 'unfill'"
           dense
@@ -62,34 +47,37 @@
           color="yellow darken-4"
           >読んだ巻数が多すぎます</v-alert
         >
-      </v-flex>
-
-      <v-flex xs12 mt-5 justify-center>
-        <v-btn block rounded outlined color="white" @click="submit"
-          >Update -更新-</v-btn
-        >
-      </v-flex>
-      <v-flex xs12 mt-5 justify-center>
-        <v-btn
-          block
-          rounded
-          outlined
-          color="white"
-          @click="deleteConfirm(manga.id)"
-          >Delete -削除-</v-btn
-        >
-      </v-flex>
-      <v-flex xs12 mt-5 justify-center>
-        <v-btn
-          block
-          rounded
-          outlined
-          color="white"
-          @click="$router.push({ name: 'mangas' })"
-          >Back -戻る-</v-btn
-        >
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
+    <v-row align-content="end" justify="center">
+      <v-row align-content="end" style="position: absolute; bottom: 10px">
+        <v-col cols="12" mt-5>
+          <v-btn py-2 block rounded outlined color="white" @click="submit"
+            >Update -更新-</v-btn
+          >
+        </v-col>
+        <v-col cols="12" mt-5>
+          <v-btn
+            block
+            rounded
+            outlined
+            color="white"
+            @click="deleteConfirm(manga.id)"
+            >Delete -削除-</v-btn
+          >
+        </v-col>
+        <v-col cols="12" mt-5>
+          <v-btn
+            block
+            rounded
+            outlined
+            color="white"
+            @click="$router.push({ name: 'mangas' })"
+            >Back -戻る-</v-btn
+          >
+        </v-col>
+      </v-row>
+    </v-row>
   </v-container>
 </template>
 
