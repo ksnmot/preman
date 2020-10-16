@@ -2,12 +2,7 @@
   <v-container text-xs-center justify-center>
     <v-layout justify-center row wrap>
       <v-flex xs10 justify-center>
-        <v-card
-          v-if="showUnreadTotal === 'true'"
-          style="height: 50px"
-          color="red"
-          class="rounded-pill"
-        >
+        <v-card style="height: 50px" color="red" class="rounded-pill">
           <v-layout v-if="unreadTotal !== 0" justify-center>
             You missed {{ unreadTotal }} volumes!
             <br />
@@ -18,13 +13,6 @@
             <br />
             未読巻はありません
           </v-layout>
-        </v-card>
-        <v-card
-          v-else
-          color="#121212"
-          style="height: 50px"
-          class="rounded-pill"
-        >
         </v-card>
       </v-flex>
       <v-flex v-if="mangas[0]" xs12 mt-1 justify-center>
@@ -97,26 +85,23 @@ export default {
     return {
       pagetitle: 'マンガリスト',
       mangas: [],
-      unreadTotal: 0,
-      showUnreadTotal: 'false',
-      // headers: [
-      //   { text: 'Title', value: 'title' },
-      //   { text: 'Read', value: 'read' },
-      //   { text: 'Latest', value: 'latest' },
-      //   { text: 'Unread', value: 'unread' },
-      //   { text: 'Action', value: 'action', sortable: false },
-      // ],
     }
   },
+  computed: {
+    unreadTotal() {
+      let unread = 0
+      for (let i = 0; i < this.mangas.length; i++) {
+        unread += this.mangas[i].unread
+      }
+      return unread
+    },
+  },
+
   created() {
     this.mangas = this.$store.state.mangas
     this.setPageTitle(this.pagetitle)
-    setTimeout(this.calcUnreadTotal, 1500)
   },
 
-  // beforeMount() {
-  //   setTimeout(this.calcUnreadTotal, 2000)
-  // },
   methods: {
     calcUnreadTotal() {
       for (let i = 0; i < this.mangas.length; i++) {
