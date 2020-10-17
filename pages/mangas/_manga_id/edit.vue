@@ -1,16 +1,18 @@
 <template>
   <v-container fluid>
     <v-row align="center" justify="center">
-      <v-col cols="12" mt-5>
+      <v-col cols="12" sm="8" md="7" mt-5 justify="center">
         <v-card>
           <v-card-text>
             <v-form>
+              <!-- マンガ名の入力フィールド -->
               <v-autocomplete
                 v-model="manga.title"
                 :items="items"
                 dense
                 label="マンガタイトル"
               ></v-autocomplete>
+              <!-- 読んだ巻数の入力フィールド -->
               <v-select
                 v-model="manga.read"
                 :items="items2"
@@ -18,6 +20,7 @@
                 dense
               >
               </v-select>
+              <!-- 最新巻数の入力フィールド -->
               <v-select
                 v-model="manga.latest"
                 :items="items2"
@@ -25,14 +28,13 @@
                 dense
               >
               </v-select>
-
-              未読巻数
-              {{ manga.unread }}
             </v-form>
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="10" mt-5>
+      <!-- アラートセクションを追加 -->
+      <v-col cols="10" sm="8" md="7" mt-5>
+        <!-- 未入力フィールドがある場合のアラート表示 -->
         <v-alert
           v-if="alert === 'unfill'"
           dense
@@ -40,6 +42,7 @@
           color="yellow darken-4"
           >未入力の項目があります</v-alert
         >
+        <!-- 読了巻数>最新巻数の場合のアラート表示 -->
         <v-alert
           v-if="alert === 'over'"
           dense
@@ -49,14 +52,16 @@
         >
       </v-col>
     </v-row>
-    <v-row align-content="end" justify="center">
-      <v-row align-content="end" style="position: absolute; bottom: 10px">
-        <v-col cols="12" mt-5>
-          <v-btn py-2 block rounded outlined color="white" @click="submit"
+    <v-footer fixed style="background-color: #121212">
+      <v-row justify="center">
+        <!-- 更新ボタン -->
+        <v-col cols="12" sm="8" md="7">
+          <v-btn block rounded outlined color="white" @click="submit"
             >Update -更新-</v-btn
           >
         </v-col>
-        <v-col cols="12" mt-5>
+        <!-- 削除ボタン -->
+        <v-col cols="12" sm="8" md="7">
           <v-btn
             block
             rounded
@@ -66,7 +71,8 @@
             >Delete -削除-</v-btn
           >
         </v-col>
-        <v-col cols="12" mt-5>
+        <!-- 戻るボタン -->
+        <v-col cols="12" sm="8" md="7">
           <v-btn
             block
             rounded
@@ -77,14 +83,17 @@
           >
         </v-col>
       </v-row>
-    </v-row>
+    </v-footer>
   </v-container>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+// 巻数選択プルダウンの最大数を定義
 const maxVol = 151
+// 巻数選択プルダウンの表示配列を作成[1,2,3,4,5,,,,]的な
 const volRange = [...Array(maxVol).keys()]
+// 力技で一旦マンガ名を全て配列に保存
 const mangaRange = [
   '亜人',
   'アークザラッド',
@@ -5242,50 +5251,60 @@ const mangaRange = [
 export default {
   data() {
     return {
-      manga: {},
+      // ストアに画面名を格納するため画面名を定義
       pagetitle: 'マンガ情報更新',
+      // 表示用のローカルマンガデータオブジェクト。ストアから引っ張ってここに全部入れる
+      manga: {},
+      // autocomplete用の配列を割り当て
       items: mangaRange,
+      // select box用の配列を割り当て
       items2: volRange,
+      // アラート出し分け用の判定定数を初期値nullで設定
       alert: null,
     }
   },
   created() {
+    // ストアに画面名を格納
     this.setPageTitle('マンガ情報更新')
-    if (!this.$route.params.manga_id) return
+    // ストアからマンガidをkeyに一旦仮の変数mangaに読み込む
     const manga = this.$store.getters.getMangaById(this.$route.params.manga_id)
+    // 無事存在して仮変数mangaに読み込めた場合はthis.mangaとしてローカルマンガに設定
     if (manga) {
       this.manga = manga
     } else {
+      // 存在しない等で仮変数mangaに読めなかった場合はマンガ一覧画面に強制遷移
       this.$router.push({ name: 'mangas' })
     }
   },
   methods: {
+    // 入力内容の確認ロジックをしたあとで、alert=nullなら実行
     submit() {
       this.inputCheck()
       if (this.alert === null) {
+        // 未読巻数を自動計算して、画面の入力内容とともにストアデータ更新、localのマンガデータはリフレッシュして、完了画面に遷移
         this.manga.unread = this.manga.latest - this.manga.read
-        if (this.$route.params.manga_id) {
-          this.updateManga({
-            id: this.$route.params.manga_id,
-            manga: this.manga,
-          })
-        } else {
-          this.addManga(this.manga)
-        }
+        this.updateManga({
+          id: this.$route.params.manga_id,
+          manga: this.manga,
+        })
         this.manga = {}
         this.$router.push({ name: 'success-edited' })
       }
     },
+    // 入力内容の確認ロジック
     inputCheck() {
+      // 全て入力されている場合はnull、一個でも未入力ならunfillをalertに格納
       if (this.manga.title && this.manga.read && this.manga.latest) {
         this.alert = null
       } else {
         this.alert = 'unfill'
       }
+      // また、読了巻数>最新巻数というありえないケースはoverをalertに格納
       if (this.manga.read > this.manga.latest) {
         this.alert = 'over'
       }
     },
+    // 削除時のアクション確認後deleteMangaをCall
     deleteConfirm(id) {
       if (confirm('削除してよろしいですか？')) {
         this.deleteManga({ id })
