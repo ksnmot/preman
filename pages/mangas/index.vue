@@ -1,6 +1,6 @@
 <template>
   <v-container text-xs-center justify-center>
-    <v-layout justify-center row wrap style="top: 10; position: fixed">
+    <v-layout justify-center row wrap>
       <!-- トップメーセージ表示セクション -->
       <v-flex xs10>
         <!-- 未読巻数の計算中はスペーサーを表示(赤いメッセージボックスは表示しない) -->
