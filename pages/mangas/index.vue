@@ -54,7 +54,7 @@
         >
           <v-layout justify-center row wrap>
             <v-flex xs4>
-              <v-layout my-3>
+              <v-layout my-3 justify-center row wrap>
                 <router-link :to="{ name: 'mangas-create' }">
                   <v-btn small rounded light color="white">Let's Start</v-btn>
                 </router-link>

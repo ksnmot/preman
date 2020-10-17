@@ -2,10 +2,8 @@
   <v-container text-center justify-center>
     <v-layout row wrap>
       <!-- ロゴを表示-->
-
       <v-flex> <img src="@/static/icon-192x192.png" width="200" /> </v-flex>
       <!-- タイトルとかwelcomeMessageを表示-->
-
       <v-flex xs12>
         <h1>Preman</h1>
         <br />

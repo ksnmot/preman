@@ -2,6 +2,7 @@
   <v-app dark>
     <v-app-bar app>
       <!-- ログイン時のみツールバーにメニューアイコンを追加-->
+      <!-- クリックするとストアのドロワー変数をture/false転換-->
       <v-app-bar-nav-icon
         v-show="$store.state.login_user"
         @click.stop="toggleSideMenu"
