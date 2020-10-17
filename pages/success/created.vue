@@ -18,8 +18,8 @@
       </v-col>
     </v-row>
     <!-- メイン画面遷移ボタン設置 -->
-    <v-row xs12 mt-5 style="height: 100px" justify="center">
-      <v-col align-self="center">
+    <v-footer padless fixed style="background-color: #121212">
+      <v-col cols="12" mt-5>
         <v-btn
           block
           rounded
@@ -28,7 +28,7 @@
           >メイン画面に戻る</v-btn
         >
       </v-col>
-    </v-row>
+    </v-footer>
   </v-container>
 </template>
 
