@@ -1,8 +1,8 @@
 <template>
   <v-container text-xs-center justify-center>
-    <v-layout justify-center row wrap>
+    <v-layout justify-center row wrap style="top: 10; position: fixed">
       <!-- トップメーセージ表示セクション -->
-      <v-flex xs10 justify-center>
+      <v-flex xs10>
         <!-- 未読巻数の計算中はスペーサーを表示(赤いメッセージボックスは表示しない) -->
         <v-card
           v-if="unreadTotal == null"
@@ -27,8 +27,9 @@
           </v-layout>
         </v-card>
       </v-flex>
+    </v-layout>
+    <v-layout justify-center row wrap>
       <!-- ボディセクション -->
-
       <!-- 登録マンガが存在しない場合はリストを表示させず、welcomeメッセージ表示-->
       <v-flex v-if="mangas.length < 1" xs10 py-15 justify-center>
         <v-card
@@ -59,7 +60,7 @@
       </v-flex>
       <!-- 登録マンガが存在、つまりmangas[0]が存在する場合はマンガリストを表示 -->
       <v-flex v-else xs12 mt-1 justify-center>
-        <v-card class="smallFont">
+        <v-card class="smallFont" style="background-color: #121212">
           <v-list-item v-if="unreadTotal !== null" row="4">
             <v-col class="px-2" cols="6">Title</v-col>
             <v-col class="px-2" cols="2">Read</v-col>
@@ -67,18 +68,18 @@
             <v-col class="px-2" cols="2">Unread</v-col>
           </v-list-item>
         </v-card>
-        <v-card v-for="manga in mangas" v-bind:key="manga.id">
+        <v-card v-for="manga in mangas" v-bind:key="manga.id" outlined tile>
           <nuxt-link
             :to="{
               name: 'mangas-manga_id-edit',
               params: { manga_id: manga.id },
             }"
           >
-            <v-list-item class="smallFont" row="4">
-              <v-col cols="6">{{ manga.title }}</v-col>
-              <v-col cols="2">{{ manga.read }}</v-col>
-              <v-col cols="2">{{ manga.latest }}</v-col>
-              <v-col cols="2">{{ manga.unread }}</v-col>
+            <v-list-item row="4">
+              <v-col cols="6" class="mediumFont">{{ manga.title }}</v-col>
+              <v-col cols="2" class="largeFont">{{ manga.read }}</v-col>
+              <v-col cols="2" class="largeFont">{{ manga.latest }}</v-col>
+              <v-col cols="2" class="largeFont">{{ manga.unread }}</v-col>
             </v-list-item>
           </nuxt-link>
         </v-card>
@@ -87,7 +88,7 @@
       <!-- マンガ登録ボタン設置-->
       <v-footer fixed style="background-color: #121212">
         <v-row justify="center">
-          <v-col cols="12" sm="8" md="6">
+          <v-col cols="12" sm="8" md="6" mt-5>
             <router-link :to="{ name: 'mangas-create' }">
               <v-btn block rounded outlined color="white"
                 >Add manga -マンガ追加登録-</v-btn
@@ -139,5 +140,23 @@ a {
 }
 .smallFont {
   font-size: 11px;
+  font-weight: bold;
 }
+.mediumFont {
+  font-size: 14px;
+}
+.largeFont {
+  font-size: 20px;
+}
+.revo {
+  top: 0;
+  position: fixed;
+}
+
+// .topFixed {
+//   position: absolute;
+//   background-color: #121212;
+//   height: 200px;
+//   width: 80%;
+// }
 </style>
