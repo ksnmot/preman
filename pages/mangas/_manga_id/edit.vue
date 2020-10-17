@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row align="center" justify="center">
-      <v-col cols="12" mt-5>
+      <v-col cols="12" sm="8" md="7" mt-5 justify="center">
         <v-card>
           <v-card-text>
             <v-form>
@@ -33,7 +33,7 @@
         </v-card>
       </v-col>
       <!-- アラートセクションを追加 -->
-      <v-col cols="10" mt-5>
+      <v-col cols="10" sm="8" md="7" mt-5>
         <!-- 未入力フィールドがある場合のアラート表示 -->
         <v-alert
           v-if="alert === 'unfill'"
@@ -52,35 +52,37 @@
         >
       </v-col>
     </v-row>
-    <v-footer padless fixed style="background-color: #121212">
-      <!-- 更新ボタン -->
-      <v-col cols="12" mt-5>
-        <v-btn py-2 block rounded outlined color="white" @click="submit"
-          >Update -更新-</v-btn
-        >
-      </v-col>
-      <!-- 削除ボタン -->
-      <v-col cols="12" mt-5>
-        <v-btn
-          block
-          rounded
-          outlined
-          color="white"
-          @click="deleteConfirm(manga.id)"
-          >Delete -削除-</v-btn
-        >
-      </v-col>
-      <!-- 戻るボタン -->
-      <v-col cols="12" mt-5>
-        <v-btn
-          block
-          rounded
-          outlined
-          color="white"
-          @click="$router.push({ name: 'mangas' })"
-          >Back -戻る-</v-btn
-        >
-      </v-col>
+    <v-footer fixed style="background-color: #121212">
+      <v-row justify="center">
+        <!-- 更新ボタン -->
+        <v-col cols="12" sm="8" md="7">
+          <v-btn block rounded outlined color="white" @click="submit"
+            >Update -更新-</v-btn
+          >
+        </v-col>
+        <!-- 削除ボタン -->
+        <v-col cols="12" sm="8" md="7">
+          <v-btn
+            block
+            rounded
+            outlined
+            color="white"
+            @click="deleteConfirm(manga.id)"
+            >Delete -削除-</v-btn
+          >
+        </v-col>
+        <!-- 戻るボタン -->
+        <v-col cols="12" sm="8" md="7">
+          <v-btn
+            block
+            rounded
+            outlined
+            color="white"
+            @click="$router.push({ name: 'mangas' })"
+            >Back -戻る-</v-btn
+          >
+        </v-col>
+      </v-row>
     </v-footer>
   </v-container>
 </template>

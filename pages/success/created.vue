@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-row xs12 mt-5 style="height: 500px" justify="center">
+    <v-row xs12 sm="8" md="7" mt-5 style="height: 500px" justify="center">
       <v-col align-self="center">
         <!-- いい感じのロゴメッセージ設置 -->
         <v-row justify="center">
@@ -18,16 +18,18 @@
       </v-col>
     </v-row>
     <!-- メイン画面遷移ボタン設置 -->
-    <v-footer padless fixed style="background-color: #121212">
-      <v-col cols="12" mt-5>
-        <v-btn
-          block
-          rounded
-          color="red"
-          @click="$router.push({ name: 'mangas' })"
-          >メイン画面に戻る</v-btn
-        >
-      </v-col>
+    <v-footer fixed style="background-color: #121212">
+      <v-row justify="center">
+        <v-col cols="12" sm="8" md="7">
+          <v-btn
+            block
+            rounded
+            color="red"
+            @click="$router.push({ name: 'mangas' })"
+            >メイン画面に戻る</v-btn
+          >
+        </v-col>
+      </v-row>
     </v-footer>
   </v-container>
 </template>

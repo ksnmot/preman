@@ -85,16 +85,16 @@
       </v-flex>
 
       <!-- マンガ登録ボタン設置-->
-      <v-footer padless fixed style="background-color: #121212">
-        <v-flex justify-center>
-          <v-col cols="12" mt-5>
+      <v-footer fixed style="background-color: #121212">
+        <v-row justify="center">
+          <v-col cols="12" sm="8" md="6">
             <router-link :to="{ name: 'mangas-create' }">
               <v-btn block rounded outlined color="white"
                 >Add manga -マンガ追加登録-</v-btn
               >
             </router-link>
           </v-col>
-        </v-flex>
+        </v-row>
       </v-footer>
     </v-layout>
   </v-container>
