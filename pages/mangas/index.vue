@@ -72,14 +72,17 @@
         </v-card>
       </v-flex>
       <!-- マンガ登録ボタン設置-->
-
-      <v-flex xs12 mt-5 align-self-end justify-center>
-        <router-link :to="{ name: 'mangas-create' }">
-          <v-btn block rounded outlined color="white"
-            >Add manga -マンガ追加登録-</v-btn
-          >
-        </router-link>
-      </v-flex>
+      <v-footer padless fixed style="background-color: #121212">
+        <v-flex justify-center>
+          <v-col cols="12" mt-5>
+            <router-link :to="{ name: 'mangas-create' }">
+              <v-btn block rounded outlined color="white"
+                >Add manga -マンガ追加登録-</v-btn
+              >
+            </router-link>
+          </v-col>
+        </v-flex>
+      </v-footer>
     </v-layout>
   </v-container>
 </template>

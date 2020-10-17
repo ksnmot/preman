@@ -43,7 +43,6 @@
           >未入力の項目があります</v-alert
         >
         <!-- 読了巻数>最新巻数の場合のアラート表示 -->
-
         <v-alert
           v-if="alert === 'over'"
           dense
@@ -53,27 +52,25 @@
         >
       </v-col>
     </v-row>
-    <v-row align-content="end" justify="center">
-      <v-row align-content="end" style="position: absolute; bottom: 10px">
-        <!-- 登録ボタン -->
-        <v-col cols="12" mt-5>
-          <v-btn block rounded outlined color="white" @click="submit"
-            >Add Manga -新規登録-</v-btn
-          >
-        </v-col>
-        <!-- 戻るボタン -->
-        <v-col cols="12" mt-5>
-          <v-btn
-            block
-            rounded
-            outlined
-            color="white"
-            @click="$router.push({ name: 'mangas' })"
-            >Back -戻る-</v-btn
-          >
-        </v-col>
-      </v-row>
-    </v-row>
+    <v-footer padless fixed style="background-color: #121212">
+      <!-- 登録ボタン -->
+      <v-col cols="12" mt-5>
+        <v-btn block rounded outlined color="white" @click="submit"
+          >Add Manga -新規登録-</v-btn
+        >
+      </v-col>
+      <!-- 戻るボタン -->
+      <v-col cols="12" mt-5>
+        <v-btn
+          block
+          rounded
+          outlined
+          color="white"
+          @click="$router.push({ name: 'mangas' })"
+          >Back -戻る-</v-btn
+        >
+      </v-col>
+    </v-footer>
   </v-container>
 </template>
 
