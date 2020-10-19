@@ -6,12 +6,15 @@
           <v-card-text>
             <v-form>
               <!-- マンガ名の入力フィールド -->
-              <v-autocomplete
+              <v-combobox
                 v-model="manga.title"
                 :items="items"
+                hint="英字タイトルの作品は英字等、正式名称で入力してください"
                 dense
+                clearable
+                hide-no-deta
                 label="マンガタイトル"
-              ></v-autocomplete>
+              ></v-combobox>
               <!-- 読んだ巻数の入力フィールド -->
               <v-select
                 v-model="manga.read"
