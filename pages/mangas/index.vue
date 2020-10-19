@@ -59,7 +59,7 @@
         </v-card>
       </v-flex>
       <!-- 登録マンガが存在、つまりmangas[0]が存在する場合はマンガリストを表示 -->
-      <v-flex v-else xs12 mt-1 justify-center>
+      <v-flex v-else xs12 mt-1 mb-12 justify-center>
         <v-card class="smallFont" style="background-color: #121212">
           <v-list-item v-if="unreadTotal !== null" row="4">
             <v-col class="px-2" cols="6">Title</v-col>
@@ -122,9 +122,7 @@ export default {
 
   created() {
     // ストアからマンガデータをdataにロード
-    console.log(this.mangas)
     this.mangas = this.$store.state.mangas
-    console.log(this.mangas)
     // タイトル表示のために現在のページ名をストアに格納
     this.setPageTitle(this.pagetitle)
   },
@@ -147,17 +145,6 @@ a {
   font-size: 14px;
 }
 .largeFont {
-  font-size: 20px;
+  font-size: 17px;
 }
-.revo {
-  top: 0;
-  position: fixed;
-}
-
-// .topFixed {
-//   position: absolute;
-//   background-color: #121212;
-//   height: 200px;
-//   width: 80%;
-// }
 </style>
