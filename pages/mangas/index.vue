@@ -84,7 +84,6 @@
           </nuxt-link>
         </v-card>
       </v-flex>
-
       <!-- マンガ登録ボタン設置-->
       <v-footer fixed style="background-color: #121212">
         <v-row justify="center">
@@ -123,7 +122,9 @@ export default {
 
   created() {
     // ストアからマンガデータをdataにロード
+    console.log(this.mangas)
     this.mangas = this.$store.state.mangas
+    console.log(this.mangas)
     // タイトル表示のために現在のページ名をストアに格納
     this.setPageTitle(this.pagetitle)
   },
