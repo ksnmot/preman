@@ -5300,6 +5300,12 @@ export default {
         this.$router.push({ name: 'success-edited' })
       }
     },
+    return() {
+      this.inputCheck()
+      if (this.alert === null) {
+        this.$router.push({ name: 'mangas' })
+      }
+    },
     // 入力内容の確認ロジック
     inputCheck() {
       // 全て入力されている場合はnull、一個でも未入力ならunfillをalertに格納
