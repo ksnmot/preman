@@ -81,13 +81,7 @@
         </v-col>
         <!-- 戻るボタン -->
         <v-col cols="12" sm="8" md="7">
-          <v-btn
-            block
-            rounded
-            outlined
-            :Disabled="alert !== null"
-            color="white"
-            @click="$router.push({ name: 'mangas' })"
+          <v-btn block rounded outlined color="white" @click="backMenu"
             >Back -戻る-</v-btn
           >
         </v-col>
@@ -5298,6 +5292,12 @@ export default {
         })
         this.manga = {}
         this.$router.push({ name: 'success-edited' })
+      }
+    },
+    backMenu() {
+      this.inputCheck()
+      if (this.alert === null) {
+        this.$router.push({ name: 'mangas' })
       }
     },
     // 入力内容の確認ロジック
