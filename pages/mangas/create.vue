@@ -6,31 +6,37 @@
           <v-card-text>
             <v-form>
               <!-- マンガ名の入力フィールド -->
-              <v-combobox
-                v-model="manga.title"
-                :items="items"
-                hint="英字タイトルの作品は英字等、正式名称で入力してください"
-                dense
-                clearable
-                hide-no-deta
-                label="マンガタイトル"
-              ></v-combobox>
+              <v-col>
+                <v-combobox
+                  v-model="manga.title"
+                  :items="items"
+                  hint="英字タイトルの作品は英字等、正式名称で入力してください。任意名での登録も可能です。"
+                  dense
+                  hide-no-deta
+                  label="マンガタイトル"
+                ></v-combobox>
+              </v-col>
+
               <!-- 読ん巻数の入力フィールド -->
-              <v-select
-                v-model="manga.read"
-                :items="items2"
-                label="読んだ巻数"
-                dense
-              >
-              </v-select>
+              <v-col>
+                <v-select
+                  v-model="manga.read"
+                  :items="items2"
+                  label="読んだ巻数"
+                  dense
+                >
+                </v-select>
+              </v-col>
               <!-- 最新巻数の入力フィールド -->
-              <v-select
-                v-model="manga.latest"
-                :items="items2"
-                label="最新巻数"
-                dense
-              >
-              </v-select>
+              <v-col>
+                <v-select
+                  v-model="manga.latest"
+                  :items="items2"
+                  label="最新巻数"
+                  dense
+                >
+                </v-select>
+              </v-col>
             </v-form>
           </v-card-text>
         </v-card>
