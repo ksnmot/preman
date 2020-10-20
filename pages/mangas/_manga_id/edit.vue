@@ -5294,11 +5294,7 @@ export default {
         this.$router.push({ name: 'success-edited' })
       }
     },
-<<<<<<< HEAD
-    return() {
-=======
     backMenu() {
->>>>>>> develop
       this.inputCheck()
       if (this.alert === null) {
         this.$router.push({ name: 'mangas' })
